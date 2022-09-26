@@ -5,7 +5,8 @@
 
 char *disemvowel(char *str) {
  int len = strlen(str);
- int i, pos = 0;
+ int i;
+ int pos = 0;
  char *result;
  result = (char*) calloc(len+1, sizeof(char));
     for (i=0; i<len; ++i) {
