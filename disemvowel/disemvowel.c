@@ -1,24 +1,36 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "disemvowel.h"
 
+//This method checks if a charcter is not a vowel. 
+bool vowel(char l){
+if (l == 'a' || l == 'e' || l == 'i' || l == 'o' || l == 'u' || l == 'A' || l == 'E' || l == 'I' || l == 'O' || l == 'U') return true;
+return false;
+}
+
 char *disemvowel(char *str) {
+ //Length of original string
  int len = strlen(str);
+ //Used in for loops
  int i;
+ //New length of string
+ int newlen = 0;
+ //Current position in the string
  int pos = 0;
  char *result;
- result = (char*) calloc(len+1, sizeof(char));
+ for(i=0; i<len; ++i){
+ if(vowel(str[i]) == false) newlen++;
+ }
+ if(newlen == 0) return (char*) "";
+ result = (char*) calloc(newlen+1, sizeof(char));
     for (i=0; i<len; ++i) {
-	if (str[i] != 'a' && str[i] != 'e' && str[i] != 'i' && str[i] != 'o' && str[i] != 'u' && str[i] != 'A' && str[i] != 'E' && str[i] != 'I' && str[i] != 'O' && str[i] != 'U'){
+	if (vowel(str[i]) == false){
 		result[pos] = str[i];
 		pos++;
 		}
 	}
- result[len] = '\0';
- if (pos == 0){
-	 free(result);
-	 return (char*) "";
- }
+ result[newlen] = '\0';
  return result;
 }
